@@ -1,16 +1,10 @@
 spring:
     application:
         name: house
-    profiles:
-        active: "dev"
-        boot:
-        admin:
-            client:
-                url: http://localhost:8081
     datasource:
         driverClassName: org.h2.Driver
         password: ''
-        url: jdbc:h2:mem:alura-forum
+        url: jdbc:h2:mem:pet-house
         username: sa
     h2:
         console:
@@ -41,13 +35,3 @@ spring:
             web:
                 exposure:
                     include: '*'
-
-
----
-
-
-spring:
-    config:
-        activate:
-            on-profile:
-            - prod

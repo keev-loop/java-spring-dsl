@@ -1,9 +1,11 @@
 package com.petshop.house.pets;
 
+import java.util.Date;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,11 +33,22 @@ public class PetEntity {
     @Column(nullable = false, name = "pet_name")
     private String petName;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "pet_gender")
     private PetGender petGender;
 
     @Column(nullable = false, name = "pet_race")
     private String petRace;
 
+    @Builder.Default
+    @Column(nullable = false, name = "pet_creation_date")
+    private Date petCreationDate = new Date();
+
+    @Builder.Default
+    @Column(nullable = false, name = "pet_updating_date")
+    private Date petUpdatingDate = new Date();
+
+    @Builder.Default
+    @Column(nullable = false, name = "pet_status")
+    private Boolean petStatus = true;
 }

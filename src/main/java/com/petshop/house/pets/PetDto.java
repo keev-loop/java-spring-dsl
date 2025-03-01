@@ -1,5 +1,6 @@
 package com.petshop.house.pets;
 
+import java.util.Date;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -18,4 +19,7 @@ public class PetDto {
     private String petName;
     private PetGender petGender;
     private String petRace;
+    private Date petCreationDate;
+    private Date petUpdatingDate;
+    private Boolean petStatus;
 }

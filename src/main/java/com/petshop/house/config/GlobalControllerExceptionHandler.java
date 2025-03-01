@@ -7,17 +7,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.petshop.house.errors.ResourceNotFoundException;
+
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler {
     @ExceptionHandler(ConversionFailedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> handleConversion(RuntimeException ex) {
+    public ResponseEntity<String> conversionFailedException(RuntimeException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
     
-    /*@ExceptionHandler(HttpNotFoundException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> handleBookNotFound(RuntimeException ex) {
+    public ResponseEntity<String> resourceNotFoundException(RuntimeException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }*/
+    }
 }

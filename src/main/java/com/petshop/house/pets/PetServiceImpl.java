@@ -2,9 +2,10 @@ package com.petshop.house.pets;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+
+import com.petshop.house.errors.ResourceNotFoundException;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -19,24 +20,22 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public List<PetDto> findAll() {
-        return petRepository
-                .findAll()
-                .stream()
-                .map(entity -> petMapper.toDto(entity))
-                .collect(Collectors.toList());
+        log.info("Buscando...");
+        return petMapper.toDto(
+            petRepository.findAll());
     }
 
     @Override
     public PetDto findById(UUID id) {
-        log.info("Buscando ID: %s", id);
-        return petMapper
-                .toDto(petRepository.findById(id)
-                    .orElseThrow());
+        log.info("Buscando ID: {}", id);
+        return petMapper.toDto(
+            petRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Pet ID %s não encontrado!", id))));
     }
 
     @Override
     public PetDto saveAn(PetDto dto) {
-        log.info("Cadastrando DTO: %s", dto);
+        log.info("Cadastrando DTO: {}", dto);
         return petMapper.toDto(
             petRepository.save(petMapper.toEntity(dto)));
     }

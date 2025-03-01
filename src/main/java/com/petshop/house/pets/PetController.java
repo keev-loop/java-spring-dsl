@@ -2,11 +2,13 @@ package com.petshop.house.pets;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,26 +25,29 @@ public class PetController {
     private final PetMapper petMapper;
 
     @GetMapping
-    public List<PetResponse> findAll() {
+    public ResponseEntity<List<PetResponse>> findAll() {
         log.info("Buscando todos...");
-        return petService
-                .findAll()
-                .stream()
-                .map(pet -> petMapper.toResponse(pet))
-                .collect(Collectors.toList());
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(petMapper.toResponse(
+                petService.findAll()));
     }
 
     @GetMapping("/{id}")
-    public PetResponse findAn(@PathVariable(value="id") UUID id) {
+    public ResponseEntity<?> findAn(@PathVariable(value="id") UUID id) {
         log.info("Buscando um...");
-        return petMapper.toResponse(petService.findById(id));
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(petMapper.toResponse(
+                petService.findById(id)));
     }
 
     @PostMapping
-    public PetResponse findAn(PetRequest request) {
+    public ResponseEntity<PetResponse> findAn(@RequestBody PetRequest request) {
         log.info("Criando um...");
-        return petMapper.toResponse(
-            petService.saveAn(petMapper.toDto(request)));
-        
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(petMapper.toResponse(
+                petService.saveAn(petMapper.toDto(request))));
     }
 }

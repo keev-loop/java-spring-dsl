@@ -1,16 +1,16 @@
 package com.petshop.house.pets;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@AllArgsConstructor
 public enum PetGender {
-    MALE('M'),
-    FEMALE('F'),
-    UNDEFINED('U');
+    MALE,
+    FEMALE,
+    UNDEFINED;
 
-    @Setter
-    private char gender;
+/*    private char gender;
+
+    public static PetGender findByValue(String value) {
+        return Enum.valueOf(PetGender.class, value);
+    }*/
 }

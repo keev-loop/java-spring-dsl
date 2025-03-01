@@ -1,5 +1,10 @@
 package com.petshop.house.pets;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +17,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PetRequest {
+    @NotNull
+    @NotEmpty
+    @JsonProperty("name")
     private String petName;
-    private char petGender;
+    @NotNull
+    @NotEmpty
+    @Size(min=4)
+    @JsonProperty("gender")
+    private PetGender petGender;
+    @NotNull
+    @NotEmpty
+    @JsonProperty("race")
     private String petRace;
 }

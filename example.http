@@ -1,12 +1,12 @@
-GET https://8080-keevloop-javaspringdsl-r5vud4jk2lg.ws-us118.gitpod.io/api/v1/pets HTTP/1.1
+GET http://localhost:8080/api/v1/pets HTTP/1.1
 
 ###
 
-GET https://8080-keevloop-javaspringdsl-r5vud4jk2lg.ws-us118.gitpod.io/api/v1/pets/91852493-4be5-4dcd-a794-d2745182ee1b HTTP/1.1
+GET http://localhost:8080/api/v1/pets/91852493-4be5-4dcd-a794-d2745182ee1b HTTP/1.1
 
 ###
 
-POST https://8080-keevloop-javaspringdsl-r5vud4jk2lg.ws-us118.gitpod.io/api/v1/pets HTTP/1.1
+POST http://localhost:8080/api/v1/pets HTTP/1.1
 content-type: application/json
 
 {

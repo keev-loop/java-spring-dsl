@@ -1,5 +1,7 @@
 package com.petshop.house.pets;
 
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -30,4 +32,8 @@ public class PetRequest {
     @NotEmpty
     @JsonProperty("race")
     private String petRace;
+    @NotNull
+    @NotEmpty
+    @JsonProperty("guardian")
+    private UUID petGuardian;
 }

@@ -17,7 +17,7 @@ public class ResourceNotFoundException extends RuntimeException {
         super(message);
     }
     public ResourceNotFoundException(Object object, UUID id) {
-        super(String.format("%s ID %s não foi encontrado", object.getClass().getName(), id));
+        super(String.format("%s ID %s não foi encontrado", object, id));
     }
     public ResourceNotFoundException(Throwable cause) {
         super(cause);

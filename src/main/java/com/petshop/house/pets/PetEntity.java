@@ -3,13 +3,21 @@ package com.petshop.house.pets;
 import java.util.Date;
 import java.util.UUID;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.petshop.house.guardian.GuardianEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +47,11 @@ public class PetEntity {
 
     @Column(nullable = false, name = "pet_race")
     private String petRace;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "guardian_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GuardianEntity petGuardian;
 
     @Builder.Default
     @Column(nullable = false, name = "pet_creation_date")

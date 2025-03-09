@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,48 +18,37 @@ import lombok.extern.slf4j.Slf4j;
 public class PetMapper {
     private final ModelMapper modelMapper;
 
-    public PetDto toDto(PetEntity entity){
+    public PetDto toPetDto(@NotNull PetEntity entity){
         log.info("ENTIDADE para DTO: {}", entity);
         return modelMapper.map(entity, PetDto.class);
     }
 
-    public List<PetDto> toDto(List<PetEntity> entities){
+    public List<PetDto> toPetDto(@NotNull @NotEmpty List<PetEntity> entities){
         log.info("ENTIDADE para DTO: {}", entities);
         return entities.stream()
-            .map(entity -> toDto(entity))
+            .map(entity -> toPetDto(entity))
             .collect(Collectors.toList());
     }
 
-    public PetDto toDto(PetRequest request){
+    public PetDto toPetDto(@NotNull PetRequest request){
         log.info("REQUEST para DTO: {}", request);
         return modelMapper.map(request, PetDto.class);
     }
 
-    public PetDto toDto(PetResponse response){
-        log.info("RESPONSE para DTO: {}", response);
-        return modelMapper.map(response, PetDto.class);
-    }
-
-    public PetEntity toEntity(PetDto dto){
+    public PetEntity toPetEntity(@NotNull PetDto dto){
         log.info("DTO para ENTIDADE: {}", dto);
         return modelMapper.map(dto, PetEntity.class);
     }
 
-
-    public PetRequest toRequest(PetDto dto){
-        log.info("DTO para REQUEST: {}", dto);
-        return modelMapper.map(dto, PetRequest.class);
-    }
-
-    public PetResponse toResponse(PetDto dto){
+    public PetResponse toPetResponse(@NotNull PetDto dto){
         log.info("DTO para RESPONSE: {}", dto);
         return modelMapper.map(dto, PetResponse.class);
     }
 
-    public List<PetResponse> toResponse(List<PetDto> dtos){
+    public List<PetResponse> toPetResponse(@NotNull @NotEmpty List<PetDto> dtos){
         log.info("DTOs para RESPONSEs: {}", dtos);
         return dtos.stream()
-            .map(dto -> toResponse(dto))
+            .map(dto -> toPetResponse(dto))
             .collect(Collectors.toList());
     }
 }

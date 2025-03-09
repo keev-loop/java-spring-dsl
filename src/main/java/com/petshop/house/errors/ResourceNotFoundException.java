@@ -1,5 +1,7 @@
 package com.petshop.house.errors;
 
+import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -13,6 +15,9 @@ public class ResourceNotFoundException extends RuntimeException {
     }
     public ResourceNotFoundException(String message) {
         super(message);
+    }
+    public ResourceNotFoundException(Object object, UUID id) {
+        super(String.format("%s ID %s não foi encontrado", object.getClass().getName(), id));
     }
     public ResourceNotFoundException(Throwable cause) {
         super(cause);

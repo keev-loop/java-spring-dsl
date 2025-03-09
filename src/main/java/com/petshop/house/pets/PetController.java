@@ -32,7 +32,7 @@ public class PetController implements PetControllerPort {
         log.info("Buscando todos...");
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(petMapper.toResponse(
+            .body(petMapper.toPetResponse(
                 petService.findAll()));
     }
 
@@ -42,7 +42,7 @@ public class PetController implements PetControllerPort {
         log.info("Buscando um...");
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(petMapper.toResponse(
+            .body(petMapper.toPetResponse(
                 petService.findById(id)));
     }
 
@@ -52,8 +52,9 @@ public class PetController implements PetControllerPort {
         log.info("Criando um...");
         return ResponseEntity
             .status(HttpStatus.CREATED)
-            .body(petMapper.toResponse(
-                petService.saveAn(petMapper.toDto(request))));
+            .body(petMapper.toPetResponse(
+                petService.saveAn(
+                petMapper.toPetDto(request))));
     }
 
     @Override
